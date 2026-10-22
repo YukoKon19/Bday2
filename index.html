@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Rie!</title>
+    <style>
+      :root {
+        --pink-50: #fff1f7;
+        --pink-100: #ffe0ee;
+        --pink-200: #ffc9e2;
+        --pink-300: #ff9bc4;
+        --pink-400: #ff6da8;
+        --pink-500: #ff4e94;
+        --pink-600: #e63a7d;
+        --pink-700: #bd2b67;
+        --rose-900: #5b1c37;
+        --white: #ffffff;
+        --shadow: rgba(162, 48, 96, 0.22);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--rose-900);
+        background: radial-gradient(circle at top, #fff7fb 0%, #ffd8ea 28%, #ffc4dc 52%, #ffa8cc 100%);
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 20px 64px;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 28px 22px 18px;
+      }
+
+      .badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(255, 104, 164, 0.3);
+        color: var(--pink-700);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        padding: 8px 16px;
+        box-shadow: 0 10px 20px rgba(255, 114, 174, 0.12);
+      }
+
+      h1 {
+        margin: 20px 0 10px;
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: #ff4f9c;
+        text-shadow: 0 6px 18px rgba(255, 97, 171, 0.2);
+      }
+
+      .subtitle {
+        margin: 0;
+        font-size: clamp(1.1rem, 2vw, 1.7rem);
+        font-weight: 600;
+        color: #a63a70;
+      }
+
+      .panel {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 28px;
+        box-shadow: 0 24px 50px var(--shadow);
+        padding: 22px;
+      }
+
+      .upload-box {
+        margin-top: 26px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .upload-field {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 18px;
+        padding: 10px 12px;
+        border: 1px solid rgba(255, 144, 191, 0.35);
+      }
+
+      input[type="file"], input[type="url"] {
+        width: 100%;
+        border: none;
+        background: transparent;
+        color: var(--rose-900);
+        font-size: 0.98rem;
+      }
+
+      input[type="url"]::placeholder {
+        color: #ad5f84;
+      }
+
+      .btn {
+        border: none;
+        cursor: pointer;
+        color: var(--white);
+        background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+        border-radius: 14px;
+        padding: 14px 18px;
+        font-weight: 700;
+        font-size: 0.96rem;
+        box-shadow: 0 14px 24px rgba(255, 97, 171, 0.28);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 28px rgba(255, 97, 171, 0.35);
+      }
+
+      .btn.secondary {
+        background: linear-gradient(135deg, #ffb4d2, #ff7eb2);
+        color: var(--rose-900);
+        box-shadow: 0 12px 22px rgba(255, 127, 178, 0.18);
+      }
+
+      .status {
+        margin-top: 14px;
+        min-height: 22px;
+        color: #8e355f;
+        font-weight: 600;
+      }
+
+      .gallery-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin: 26px 0 16px;
+      }
+
+      .gallery-head h2 {
+        margin: 0;
+        font-size: clamp(1.3rem, 2vw, 1.8rem);
+      }
+
+      .sync-pill {
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--pink-700);
+        border: 1px solid rgba(255, 137, 187, 0.32);
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .photo-card {
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 136, 186, 0.3);
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 16px 26px rgba(255, 128, 182, 0.12);
+      }
+
+      .photo-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        background: linear-gradient(135deg, #fff0f7, #ffd6e7);
+      }
+
+      .photo-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 12px 10px;
+        font-size: 0.82rem;
+        color: #7d355d;
+      }
+
+      .trash {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+        color: #b8427d;
+      }
+
+      .empty-state {
+        background: rgba(255, 255, 255, 0.4);
+        border: 1px dashed rgba(255, 157, 196, 0.5);
+        border-radius: 20px;
+        padding: 30px 18px;
+        text-align: center;
+        color: #8b426a;
+        font-weight: 600;
+      }
+
+      @media (max-width: 640px) {
+        .upload-box {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-head {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="badge">Birthday Surprise</div>
+        <h1>Happy Birthday Rie!</h1>
+        <p class="subtitle">Happy 23rd birthday</p>
+      </header>
+
+      <section class="panel">
+        <div class="upload-box">
+          <div class="upload-field">
+            <input id="imageInput" type="file" accept="image/*" />
+          </div>
+          <button id="uploadBtn" class="btn" type="button">Add photo</button>
+        </div>
+
+        <div class="upload-box" style="margin-top: 10px;">
+          <div class="upload-field">
+            <input id="imageUrlInput" type="url" placeholder="Or paste an image URL here" />
+          </div>
+          <button id="urlBtn" class="btn secondary" type="button">Add from URL</button>
+        </div>
+
+        <div id="status" class="status" aria-live="polite"></div>
+      </section>
+
+      <div class="gallery-head">
+        <h2>Guest Gallery</h2>
+        <span class="sync-pill">Live sync</span>
+      </div>
+
+      <section id="gallery" class="gallery" aria-live="polite"></section>
+    </div>
+
+    <script type="module">
+      const firebaseConfig = {
+        apiKey: "PUT_YOUR_FIREBASE_API_KEY_HERE",
+        authDomain: "PUT_YOUR_FIREBASE_AUTH_DOMAIN_HERE",
+        projectId: "PUT_YOUR_FIREBASE_PROJECT_ID_HERE",
+        storageBucket: "PUT_YOUR_FIREBASE_STORAGE_BUCKET_HERE",
+        messagingSenderId: "PUT_YOUR_FIREBASE_MESSAGING_SENDER_ID_HERE",
+        appId: "PUT_YOUR_FIREBASE_APP_ID_HERE",
+      };
+
+      const defaultGallery = [
+        {
+          id: "welcome-1",
+          src: "https://drive.google.com/uc?export=view&id=17s10nvv3hsuMhWEMPC5tfkLjb6XNpkwi",
+          name: "Birthday love",
+        },
+        {
+          id: "welcome-2",
+          src: "https://drive.google.com/uc?export=view&id=1O1N51lLMXR-Zo_vcP6PYGo7A-NRsWZpY",
+          name: "Sweet memories",
+        },
+        {
+          id: "welcome-3",
+          src: "https://drive.google.com/uc?export=view&id=14WR5rePLxAWcNfZC9UwIwhzMigoGBSVS",
+          name: "Cute moments",
+        },
+        {
+          id: "welcome-4",
+          src: "https://drive.google.com/uc?export=view&id=1RMkOOawByPgr17OFgIreZjw7R9GEKKSy",
+          name: "Smile forever",
+        },
+        {
+          id: "welcome-5",
+          src: "https://drive.google.com/uc?export=view&id=1FEzYzTKmqSuvOW6aXQIRIs7Vnrp4e-iM",
+          name: "Love and laughter",
+        },
+        {
+          id: "welcome-6",
+          src: "https://drive.google.com/uc?export=view&id=1Vh9EaQj_9QF5BI2Sa5uKKQ92wUmMrwXn",
+          name: "Forever grateful",
+        },
+        {
+          id: "welcome-7",
+          src: "https://drive.google.com/uc?export=view&id=10eKqBfxxBQy6RwLjOZ0rpnEL4olbAUK7",
+          name: "Birthday sparkle",
+        }
+      ];
+
+      const galleryRoot = document.getElementById("gallery");
+      const statusEl = document.getElementById("status");
+      const imageInput = document.getElementById("imageInput");
+      const imageUrlInput = document.getElementById("imageUrlInput");
+
+      let gallery = [];
+      let liveMode = false;
+      let db = null;
+      let storage = null;
+      let galleryRef = null;
+      let storageRef = null;
+
+      function setStatus(message, isError = false) {
+        statusEl.textContent = message;
+        statusEl.style.color = isError ? "#9d2f5f" : "#7a395f";
+      }
+
+      function renderGallery(items) {
+        galleryRoot.innerHTML = "";
+
+        if (!items || items.length === 0) {
+          galleryRoot.innerHTML = '<div class="empty-state">No photos yet. Be the first to add one for Rie!</div>';
+          return;
+        }
+
+        items.forEach((item) => {
+          const card = document.createElement("article");
+          card.className = "photo-card";
+
+          const img = document.createElement("img");
+          img.src = item.src;
+          img.alt = item.name || "Birthday memory";
+          img.loading = "lazy";
+
+          const meta = document.createElement("div");
+          meta.className = "photo-meta";
+
+          const label = document.createElement("span");
+          label.textContent = item.name || "Memory";
+
+          const deleteBtn = document.createElement("button");
+          deleteBtn.className = "trash";
+          deleteBtn.type = "button";
+          deleteBtn.setAttribute("aria-label", "Delete image");
+          deleteBtn.innerHTML = "🗑️";
+          deleteBtn.addEventListener("click", () => removeImage(item.id));
+
+          meta.append(label, deleteBtn);
+          card.append(img, meta);
+          galleryRoot.appendChild(card);
+        });
+      }
+
+      function readLocalGallery() {
+        try {
+          const saved = JSON.parse(localStorage.getItem("birthday-gallery"));
+          if (Array.isArray(saved) && saved.length) {
+            return saved;
+          }
+        } catch (error) {
+          console.warn("Could not read local gallery:", error);
+        }
+        return defaultGallery;
+      }
+
+      function writeLocalGallery(nextGallery) {
+        localStorage.setItem("birthday-gallery", JSON.stringify(nextGallery));
+      }
+
+      async function saveGallery(nextGallery) {
+        gallery = nextGallery;
+        renderGallery(gallery);
+
+        if (liveMode && db) {
+          try {
+            await set(galleryRef, nextGallery);
+          } catch (error) {
+            console.error("Could not sync gallery:", error);
+            setStatus("Upload worked, but live sync could not save. Check Firebase config.", true);
+          }
+        } else {
+          writeLocalGallery(nextGallery);
+        }
+      }
+
+      async function addImage(src, name = "Birthday memory") {
+        const nextGallery = [
+          ...gallery,
+          { id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()), src, name }
+        ];
+
+        await saveGallery(nextGallery);
+        setStatus("Photo added!");
+      }
+
+      async function removeImage(id) {
+        const nextGallery = gallery.filter((item) => item.id !== id);
+        await saveGallery(nextGallery);
+      }
+
+      async function handleFileUpload() {
+        const file = imageInput.files[0];
+        if (!file) {
+          setStatus("Choose a photo first.", true);
+          return;
+        }
+
+        if (liveMode && storage) {
+          try {
+            const filePath = `birthday-gallery/${Date.now()}-${file.name}`;
+            const fileRef = ref(storage, filePath);
+            await uploadBytes(fileRef, file);
+            const downloadUrl = await getDownloadURL(fileRef);
+            await addImage(downloadUrl, file.name);
+            imageInput.value = "";
+            return;
+          } catch (error) {
+            console.error("Storage upload failed:", error);
+            setStatus("Image upload failed. Please try a URL instead or check Firebase setup.", true);
+            return;
+          }
+        }
+
+        const reader = new FileReader();
+        reader.onload = async () => {
+          await addImage(reader.result, file.name);
+        };
+        reader.readAsDataURL(file);
+        imageInput.value = "";
+      }
+
+      async function handleUrlUpload() {
+        const url = imageUrlInput.value.trim();
+        if (!url) {
+          setStatus("Paste an image URL first.", true);
+          return;
+        }
+
+        await addImage(url, "Shared memory");
+        imageUrlInput.value = "";
+      }
+
+      async function initializeFirebase() {
+        if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes("PUT_YOUR")) {
+          setStatus("Live sync is off because Firebase is not configured yet. Add your config to enable sharing across visitors.");
+          return false;
+        }
+
+        try {
+          const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+          const { getDatabase, ref, set } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js");
+          const { getStorage, ref: storageRefFn, uploadBytes, getDownloadURL } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js");
+
+          const app = initializeApp(firebaseConfig);
+          db = getDatabase(app);
+          storage = getStorage(app);
+          galleryRef = ref(db, "birthdayGallery");
+          storageRef = storageRefFn(storage, "birthdayGallery");
+
+          const { onValue } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js");
+
+          onValue(galleryRef, (snapshot) => {
+            const data = snapshot.val();
+            if (Array.isArray(data) && data.length) {
+              gallery = data;
+              renderGallery(gallery);
+            } else {
+              gallery = defaultGallery;
+              renderGallery(gallery);
+            }
+          });
+
+          liveMode = true;
+          setStatus("Live sync is enabled.");
+          return true;
+        } catch (error) {
+          console.error("Firebase initialization failed:", error);
+          setStatus("Firebase setup couldn’t initialize. Falling back to local gallery mode.");
+          return false;
+        }
+      }
+
+      async function init() {
+        gallery = readLocalGallery();
+        renderGallery(gallery);
+
+        const firebaseReady = await initializeFirebase();
+        if (!firebaseReady) {
+          gallery = readLocalGallery();
+          renderGallery(gallery);
+          setStatus("Local gallery mode is active. Add your Firebase config to enable shared syncing.");
+        }
+
+        document.getElementById("uploadBtn").addEventListener("click", handleFileUpload);
+        document.getElementById("urlBtn").addEventListener("click", handleUrlUpload);
+      }
+
+      init();
+    </script>
+  </body>
+</html>
